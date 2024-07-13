@@ -6,11 +6,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
-
-# export ASPNETCORE_Kestrel__Certificates__Default__Path="/home/bstrang/.aspnet/https/test.pem"
-# export ASPNETCORE_Kestrel__Certificates__Default__KeyPath="/home/bstrang/.aspnet/https/test.key"
-# export ASPNETCORE_Kestrel__Certificates__Default__Password=VCU3econ4
-#
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=( git zsh-autosuggestions zsh-autocomplete )
