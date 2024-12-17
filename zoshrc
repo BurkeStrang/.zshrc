@@ -1,15 +1,6 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-export TERM=wezterm
-
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="burke"
 
 plugins=( git docker zsh-autosuggestions zsh-autocomplete )
 
@@ -17,87 +8,24 @@ source $ZSH/oh-my-zsh.sh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=magenta'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# cache_dotnet_tests() {
-#     dotnet test --list-tests --no-build | sed -n '/The following Tests are available:/,$p' | sed '1d' | sed 's/(.*)//' > ~/.dotnet_tests_cache
-# }
-
-# _get_dotnet_tests() {
-#     # Get the current command line input
-#     local curcontext="$curcontext" state line
-#     _arguments '*::args:->args'
-#
-#     case $state in
-#         args)
-#             # Only trigger autocompletion if '--filter' is detected in the command
-#             if [[ "$words" == *"--filter"* ]]; then
-#                 # Check if the cache file exists
-#                 if [[ -f ~/.dotnet_tests_cache ]]; then
-#                     local test_list=$(cat ~/.dotnet_tests_cache)
-#
-#                     # For debugging: echo test list to ensure it's read
-#                     echo "Test List: $test_list"
-#
-#                     # Provide autocompletion suggestions matching user input
-#                     compadd $(echo "$test_list" | grep -i "^$1")
-#                 else
-#                     echo "Cache file not found"
-#                     compadd "No test cache available. Run cache_dotnet_tests to generate."
-#                 fi
-#             fi
-#         ;;
-#     esac
-# }
-
-# Bind the completion function to the 'dotnet test' command
-# compdef _get_dotnet_tests dotnet
-# Run this function manually or periodically to update the cache
-
-
-# this could be used to git all the test in history for a project
-# dotnet test --list-tests --no-build | sed -n '/The following Tests are available:/,$p' | sed '1d' | sed 's/(.*)//' | while read test; do
-#   timestamp=$(date +%s)
-#   echo ": $timestamp:0;dotnet test --filter $test" >> ~/.zsh_history
-# done
-
-
-# fpath+=~/.oh-my-zsh/completions
-# autoload -U compinit && compinit
-
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 export DOTNET_ROOT=/usr/share/dotnet
 export PATH=$PATH:$DOTNET_ROOT
-export PATH="$PATH:/home/bstrang/.dotnet/tools"
+export PATH="$PATH:/home/burke/.dotnet/tools"
 
-# this is just for development is may have to change depending
 # export ASPNETCORE_ENVIRONMENT=Development
 
-export GOROOT=/usr/local/go-1.23.0
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 
 export PATH=/usr/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
-export OPENAI_API_KEY="Ihavetopayforthis"
-# export WSLENV=~/repos/library/web-sdk-library
-#alias
 alias python=python3
-# alias nuget="nuget.exe"
-# alias jq="jq.exe"
-
 
 mvd(){
-    downloads_path="/mnt/c/Users/bstrang/Downloads"
+    downloads_path="/mnt/c/Users/burke/Downloads"
     current_directory="$(pwd)"
 
     # Find the most recently modified file
@@ -111,7 +39,7 @@ mvd(){
     fi
 }
 
-v() {
+v(){
   if [ $# -eq 0 ]; then
     nvim
   else
@@ -134,157 +62,8 @@ t() {
 }
 
 
-# Set up fzf key bindings and fuzzy completion
-# source <(fzf --zsh)
 
 alias l="ls -l"
-# alias v="nvim"
-alias c="clear"
-alias e="exit"
-alias nco="~/.config/nvim"
-alias nsh="~/.local/share/nvim"
-alias nst="~/.local/state/nvim"
-alias nca="~/.cache/nvim# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-export TERM=wezterm
-
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=( git docker zsh-autosuggestions zsh-autocomplete )
-
-source $ZSH/oh-my-zsh.sh
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=magenta'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# cache_dotnet_tests() {
-#     dotnet test --list-tests --no-build | sed -n '/The following Tests are available:/,$p' | sed '1d' | sed 's/(.*)//' > ~/.dotnet_tests_cache
-# }
-
-# _get_dotnet_tests() {
-#     # Get the current command line input
-#     local curcontext="$curcontext" state line
-#     _arguments '*::args:->args'
-#
-#     case $state in
-#         args)
-#             # Only trigger autocompletion if '--filter' is detected in the command
-#             if [[ "$words" == *"--filter"* ]]; then
-#                 # Check if the cache file exists
-#                 if [[ -f ~/.dotnet_tests_cache ]]; then
-#                     local test_list=$(cat ~/.dotnet_tests_cache)
-#
-#                     # For debugging: echo test list to ensure it's read
-#                     echo "Test List: $test_list"
-#
-#                     # Provide autocompletion suggestions matching user input
-#                     compadd $(echo "$test_list" | grep -i "^$1")
-#                 else
-#                     echo "Cache file not found"
-#                     compadd "No test cache available. Run cache_dotnet_tests to generate."
-#                 fi
-#             fi
-#         ;;
-#     esac
-# }
-
-# Bind the completion function to the 'dotnet test' command
-# compdef _get_dotnet_tests dotnet
-# Run this function manually or periodically to update the cache
-
-
-# this could be used to git all the test in history for a project
-# dotnet test --list-tests --no-build | sed -n '/The following Tests are available:/,$p' | sed '1d' | sed 's/(.*)//' | while read test; do
-#   timestamp=$(date +%s)
-#   echo ": $timestamp:0;dotnet test --filter $test" >> ~/.zsh_history
-# done
-
-
-# fpath+=~/.oh-my-zsh/completions
-# autoload -U compinit && compinit
-
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-export DOTNET_ROOT=/usr/share/dotnet
-export PATH=$PATH:$DOTNET_ROOT
-export PATH="$PATH:/home/bstrang/.dotnet/tools"
-
-# this is just for development is may have to change depending
-# export ASPNETCORE_ENVIRONMENT=Development
-
-export GOROOT=/usr/local/go-1.23.0
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-export PATH=/usr/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-
-export OPENAI_API_KEY="Ihavetopayforthis"
-# export WSLENV=~/repos/library/web-sdk-library
-#alias
-alias python=python3
-# alias nuget="nuget.exe"
-# alias jq="jq.exe"
-
-
-mvd(){
-    downloads_path="/mnt/c/Users/bstrang/Downloads"
-    current_directory="$(pwd)"
-
-    # Find the most recently modified file
-    last_write_file=$(find "$downloads_path" -type f -printf "%T@ %p\n" | sort -n | tail -1 | cut -d' ' -f2-)
-
-    if [[ -n "$last_write_file" ]]; then
-        mv "$last_write_file" "$current_directory"
-        echo "Moved file: $(basename "$last_write_file") to $current_directory"
-    else
-        echo "No files found in the Downloads folder."
-    fi
-}
-
-v() {
-  if [ $# -eq 0 ]; then
-    nvim
-  else
-    for file in "$@"; do
-      if [[ -w "$file" ]]; then
-        nvim "$file"
-      else
-        sudo -E nvim "$file"
-      fi
-    done
-  fi
-}
-
-t() {
-  if command -v tmux &> /dev/null; then
-    if [[ -z "$TMUX" ]]; then
-      tmux attach-session -t based || tmux new-session -s based
-    fi
-  fi
-}
-
-
-# Set up fzf key bindings and fuzzy completion
-# source <(fzf --zsh)
-
-alias l="ls -l"
-# alias v="nvim"
 alias c="clear"
 alias e="exit"
 alias nco="~/.config/nvim"
@@ -292,152 +71,3 @@ alias nsh="~/.local/share/nvim"
 alias nst="~/.local/state/nvim"
 alias nca="~/.cache/nvim"
 alias re="$HOME/repos"
-alias dl="/mnt/c/Users/b# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-export TERM=wezterm
-
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=( git docker zsh-autosuggestions zsh-autocomplete )
-
-source $ZSH/oh-my-zsh.sh
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=magenta'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# cache_dotnet_tests() {
-#     dotnet test --list-tests --no-build | sed -n '/The following Tests are available:/,$p' | sed '1d' | sed 's/(.*)//' > ~/.dotnet_tests_cache
-# }
-
-# _get_dotnet_tests() {
-#     # Get the current command line input
-#     local curcontext="$curcontext" state line
-#     _arguments '*::args:->args'
-#
-#     case $state in
-#         args)
-#             # Only trigger autocompletion if '--filter' is detected in the command
-#             if [[ "$words" == *"--filter"* ]]; then
-#                 # Check if the cache file exists
-#                 if [[ -f ~/.dotnet_tests_cache ]]; then
-#                     local test_list=$(cat ~/.dotnet_tests_cache)
-#
-#                     # For debugging: echo test list to ensure it's read
-#                     echo "Test List: $test_list"
-#
-#                     # Provide autocompletion suggestions matching user input
-#                     compadd $(echo "$test_list" | grep -i "^$1")
-#                 else
-#                     echo "Cache file not found"
-#                     compadd "No test cache available. Run cache_dotnet_tests to generate."
-#                 fi
-#             fi
-#         ;;
-#     esac
-# }
-
-# Bind the completion function to the 'dotnet test' command
-# compdef _get_dotnet_tests dotnet
-# Run this function manually or periodically to update the cache
-
-
-# this could be used to git all the test in history for a project
-# dotnet test --list-tests --no-build | sed -n '/The following Tests are available:/,$p' | sed '1d' | sed 's/(.*)//' | while read test; do
-#   timestamp=$(date +%s)
-#   echo ": $timestamp:0;dotnet test --filter $test" >> ~/.zsh_history
-# done
-
-
-# fpath+=~/.oh-my-zsh/completions
-# autoload -U compinit && compinit
-
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-export DOTNET_ROOT=/usr/share/dotnet
-export PATH=$PATH:$DOTNET_ROOT
-export PATH="$PATH:/home/bstrang/.dotnet/tools"
-
-# this is just for development is may have to change depending
-# export ASPNETCORE_ENVIRONMENT=Development
-
-export GOROOT=/usr/local/go-1.23.0
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-export PATH=/usr/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-
-export OPENAI_API_KEY="Ihavetopayforthis"
-# export WSLENV=~/repos/library/web-sdk-library
-#alias
-alias python=python3
-# alias nuget="nuget.exe"
-# alias jq="jq.exe"
-
-
-mvd(){
-    downloads_path="/mnt/c/Users/bstrang/Downloads"
-    current_directory="$(pwd)"
-
-    # Find the most recently modified file
-    last_write_file=$(find "$downloads_path" -type f -printf "%T@ %p\n" | sort -n | tail -1 | cut -d' ' -f2-)
-
-    if [[ -n "$last_write_file" ]]; then
-        mv "$last_write_file" "$current_directory"
-        echo "Moved file: $(basename "$last_write_file") to $current_directory"
-    else
-        echo "No files found in the Downloads folder."
-    fi
-}
-
-v() {
-  if [ $# -eq 0 ]; then
-    nvim
-  else
-    for file in "$@"; do
-      if [[ -w "$file" ]]; then
-        nvim "$file"
-      else
-        sudo -E nvim "$file"
-      fi
-    done
-  fi
-}
-
-t() {
-  if command -v tmux &> /dev/null; then
-    if [[ -z "$TMUX" ]]; then
-      tmux attach-session -t based || tmux new-session -s based
-    fi
-  fi
-}
-
-
-# Set up fzf key bindings and fuzzy completion
-# source <(fzf --zsh)
-
-alias l="ls -l"
-# alias v="nvim"
-alias c="clear"
-alias e="exit"
-alias nco="~/.config/nvim"
-alias nsh="~/.local/share/nvim"
-alias nst="~/.local/state/nvim"
-alias nca="~/.cache/nvim"
-alias re="$HOME/repos"
-alias dl="/mnt/c/Users/bstrang/Downloads"
