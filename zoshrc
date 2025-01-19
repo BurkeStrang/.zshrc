@@ -6,14 +6,12 @@ plugins=( git docker zsh-autosuggestions zsh-autocomplete )
 
 source $ZSH/oh-my-zsh.sh
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=magenta'
-
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 export DOTNET_ROOT=/usr/share/dotnet
 export PATH=$PATH:$DOTNET_ROOT
-export PATH="$PATH:/home/burke/.dotnet/tools"
+export PATH="$PATH:/home/bstrang/.dotnet/tools"
 
 # export ASPNETCORE_ENVIRONMENT=Development
 
@@ -22,10 +20,9 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=/usr/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
-alias python=python3
 
 mvd(){
-    downloads_path="/mnt/c/Users/burke/Downloads"
+    downloads_path="/mnt/c/Users/bstrang/Downloads"
     current_directory="$(pwd)"
 
     # Find the most recently modified file
@@ -61,9 +58,7 @@ t() {
   fi
 }
 
-
-
-alias l="ls -l"
+alias ls="eza"
 alias c="clear"
 alias e="exit"
 alias nco="~/.config/nvim"
@@ -71,3 +66,29 @@ alias nsh="~/.local/share/nvim"
 alias nst="~/.local/state/nvim"
 alias nca="~/.cache/nvim"
 alias re="$HOME/repos"
+alias python=python3
+#zoxide
+alias s="z"
+
+# Define a function that updates the DOTNET_TESTS array for your project.
+dtc() {
+  DOTNET_TESTS=("${(f)$(dotnet test --list-tests --no-build \
+    | sed -n '/The following Tests are available:/,$p' \
+    | sed '1d' \
+    | sed 's/(.*)//' \
+    | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' \
+    | sort | uniq)}")
+  
+  # Optional: display a message showing how many tests were found.
+  echo "Updated DOTNET_TESTS: found ${#DOTNET_TESTS[@]} tests."
+}
+
+
+fpath=(~/.oh-my-zsh/completions $fpath)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# zstyle ':completion:*:*:dotnet:*' script ~/.oh-my-zsh/completions/_dotnet_test_filter
+autoload -U compinit; compinit
+eval "$(zoxide init zsh)"
+# Enable fuzzy matching for completions.
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
