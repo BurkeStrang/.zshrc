@@ -14,11 +14,26 @@ export PATH=$PATH:$DOTNET_ROOT
 export PATH="$PATH:/home/bstrang/.dotnet/tools"
 
 # export ASPNETCORE_ENVIRONMENT=Development
+export OPENAI_API_KEY=""
 
 export PATH=$PATH:/usr/local/go/bin
-
 export PATH=/usr/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+
+export PATH=$PATH:/usr/local
+
+export BROWSER="wslview"
+
+# add gitignore
+gitignore(){
+ curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/VisualStudio.gitignore
+}
+
+# if you ever need to clear files that are now in the newley added gitignore
+gitignoreclear(){
+  git add .gitignore
+  git rm -r --cached .
+}
 
 
 mvd(){
@@ -71,7 +86,7 @@ alias python=python3
 alias s="z"
 
 # Define a function that updates the DOTNET_TESTS array for your project.
-dtc() {
+dotnet_test_setup() {
   DOTNET_TESTS=("${(f)$(dotnet test --list-tests --no-build \
     | sed -n '/The following Tests are available:/,$p' \
     | sed '1d' \
@@ -88,7 +103,13 @@ fpath=(~/.oh-my-zsh/completions $fpath)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # zstyle ':completion:*:*:dotnet:*' script ~/.oh-my-zsh/completions/_dotnet_test_filter
-autoload -U compinit; compinit
+# autoload -U compinit; compinit
 eval "$(zoxide init zsh)"
 # Enable fuzzy matching for completions.
 # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# Created by `pipx` on 2025-01-25 21:52:10
+export PATH="$PATH:/home/bstrang/.local/bin"
+
+# build for c
+export VCPKG_ROOT=$HOME/vcpkg
